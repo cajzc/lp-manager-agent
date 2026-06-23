@@ -1,0 +1,59 @@
+{
+  "name": "openclaw-lp-manager",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenClaw-native autonomous Orca LP manager bounded by Solana Native recurring allowances.",
+  "files": [
+    "dist",
+    "scripts",
+    "skills",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "openclaw": {
+    "extensions": [
+      "./src/openclaw-plugin.ts"
+    ],
+    "runtimeExtensions": [
+      "./dist/openclaw-plugin.js"
+    ]
+  },
+  "knip": {
+    "entry": ["src/openclaw-plugin.ts", "test/**/*.test.ts"],
+    "project": ["src/**/*.ts", "test/**/*.ts"]
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc --project tsconfig.json",
+    "plugin:check": "npm run build && npx openclaw plugins inspect lp-manager --runtime --json",
+    "openclaw:install": "npm run build && node scripts/install-openclaw-plugin.mjs",
+    "openclaw:inspect": "npx openclaw plugins inspect lp-manager --runtime --json",
+    "openclaw:gateway": "npx openclaw gateway run",
+    "recording:check": "npm run build && node scripts/prepare-recording.mjs --check",
+    "recording:prepare": "npm run build && node scripts/prepare-recording.mjs",
+    "test": "vitest run",
+    "typecheck": "NODE_OPTIONS=--max-old-space-size=8192 tsc --noEmit"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@orca-so/common-sdk": "^0.7.0",
+    "@orca-so/whirlpools-sdk": "^0.21.0",
+    "@solana/kit": "^6.9.0",
+    "@solana/spl-token": "^0.4.14",
+    "@solana/subscriptions": "^0.3.0",
+    "@solana/web3.js": "^1.98.4",
+    "better-sqlite3": "^12.10.0",
+    "decimal.js": "^10.5.0",
+    "solana-agent-kit": "2.0.10",
+    "typebox": "^1.0.62",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/bn.js": "^5.1.6",
+    "@types/node": "^24.10.1",
+    "openclaw": "2026.6.9",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.14"
+  }
+}

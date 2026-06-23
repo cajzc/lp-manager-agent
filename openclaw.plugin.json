@@ -1,0 +1,63 @@
+{
+  "id": "lp-manager",
+  "name": "Solana LP Manager",
+  "description": "Autonomous Orca LP management bounded by Solana Native recurring allowances.",
+  "activation": {
+    "onStartup": true
+  },
+  "skills": [
+    "./skills"
+  ],
+  "contracts": {
+    "tools": [
+      "lp_manager_status",
+      "lp_manager_authorize",
+      "lp_manager_configure_strategy",
+      "lp_manager_run",
+      "lp_manager_feedback",
+      "lp_manager_change_allowance",
+      "lp_manager_stop"
+    ]
+  },
+  "uiHints": {
+    "publicBaseUrl": {
+      "label": "Public HTTPS URL",
+      "help": "Public Gateway URL used for wallet-signable Solana Actions."
+    },
+    "rpcUrl": {
+      "label": "Solana RPC URL",
+      "advanced": true
+    },
+    "enableMainnet": {
+      "label": "Enable mainnet",
+      "help": "Explicit safety switch required when cluster is mainnet-beta.",
+      "advanced": true
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["publicBaseUrl"],
+    "properties": {
+      "cluster": { "type": "string", "enum": ["devnet", "mainnet-beta"], "default": "devnet" },
+      "rpcUrl": { "type": "string", "format": "uri" },
+      "publicBaseUrl": { "type": "string", "format": "uri" },
+      "databasePath": { "type": "string" },
+      "pythHermesUrl": { "type": "string", "format": "uri", "default": "https://hermes.pyth.network" },
+      "pythFeedId": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+      "pythSymbol": { "type": "string", "default": "SOL/USD" },
+      "oracleQuoteMint": { "type": "string" },
+      "quoteTokenLabel": { "type": "string", "default": "USDC" },
+      "defaultOwnerWallet": { "type": "string" },
+      "defaultWhirlpool": { "type": "string" },
+      "maxOracleAgeSeconds": { "type": "integer", "minimum": 1, "maximum": 300, "default": 30 },
+      "maxPoolOracleDeviationBps": { "type": "integer", "minimum": 1, "maximum": 5000, "default": 500 },
+      "monitorIntervalSeconds": { "type": "integer", "minimum": 5, "maximum": 3600, "default": 30 },
+      "minimumAgentSol": { "type": "number", "exclusiveMinimum": 0, "default": 0.02 },
+      "notificationSessionKey": { "type": "string", "default": "agent:main:main" },
+      "notificationTelegramChatId": { "type": "string", "pattern": "^-?[0-9]+$" },
+      "notificationsEnabled": { "type": "boolean", "default": true },
+      "enableMainnet": { "type": "boolean", "default": false }
+    }
+  }
+}
