@@ -6,6 +6,8 @@ Each OpenClaw installation is intentionally single-owner. The project can be ins
 
 The user keeps their wallet and private key outside this application. Their wallet signs only allowance creation, cap replacement, and revocation through Solana Actions/Blinks. A local agent wallet signs allowance pulls, balancing swaps, position opens, closes, and rebalances. The on-chain recurring delegation is the spending boundary.
 
+![Solana LP Manager demo](assets/lp-manager-demo.gif)
+
 ## What Runs
 
 One existing OpenClaw Gateway process owns:
