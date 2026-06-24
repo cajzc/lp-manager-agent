@@ -4,7 +4,9 @@ Use Solana recurring allowances and an OpenClaw skill to manage Orca Whirlpool L
 
 The agent reads SOL/USD prices from Pyth, checks live pool and position data on Solana, and stores its strategy, allowance, position, and execution state in a local SQLite database. Solana Blinks let the user sign wallet actions to create, increase, replace, or revoke the agent's recurring allowance. The agent can only deploy and rebalance funds within that confirmed limit.
 
-![Solana LP Manager demo](assets/lp-manager-demo.gif)
+### [▶ Watch the 39-second HD demo](assets/lp-manager-demo.mp4)
+
+[![Open the Solana LP Manager demo video](assets/lp-manager-demo.png)](assets/lp-manager-demo.mp4)
 
 ## How It Works
 
